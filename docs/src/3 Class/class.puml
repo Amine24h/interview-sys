@@ -62,11 +62,6 @@ class InterviewResponse {
     Integer order
 }
 
-enum DeclinedBy {
-    RECRUITER
-    TECHNICAL_ADVISOR
-}
-
 enum InterviewRequestStatus {
     PENDING
     ACCEPTED
