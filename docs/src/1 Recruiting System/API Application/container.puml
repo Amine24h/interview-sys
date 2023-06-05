@@ -1,0 +1,61 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container(spa, "Single Page Application", "Typescript and Angular", "Provides all the recruiting system functionality to recruiter/technical advisor via their web browser.")
+Container(ma, "Mobile App", "Xamarin", "Provides a limited subset ot recruiting system functionality to recruiter/technical advisor via their mobile device.")
+Container(db, "Database", "Relational Database Schema", "Stores interview information, technical advisors, job positions, etc.")
+System_Ext(unit4, "Unit4 System", "Stores all of the information about technical advisors, etc.")
+
+Container_Boundary(api, "API Application") {
+    Component(sign, "Sign In Controller", "Rest Controller", "Allows users to sign in to the recruiting system")
+    Component(intrvc, "Interview Controller", "Rest Controller", "Provides operations to manage interviews")
+    Component(lineobc, "Line of business Controller", "Rest Controller", "Provides CRUD operations on line of business")
+    Component(jobpc, "Job position Controller", "Rest Controller", "Provides CRUD operations on job positions")
+    Component(techac, "Technical advisor Controller", "Rest Controller", "Provides CRUD operations on technical advisor")
+    Component(recrc, "Recruiter Controller", "Rest Controller", "Provides CRUD operations on recruiter")
+
+    Component(intrv, "Interview", "Component", "Provides operations to manage interviews")
+    Component(lineob, "Line of business", "Component", "Provides CRUD operations on line of business")
+    Component(jobp, "Job position", "Component", "Provides CRUD operations on job positions")
+    Component(techa, "Technical advisor", "Component", "Provides CRUD operations on technical advisor")
+    Component(recr, "Recruiter", "Component", "Provides CRUD operations on recruiter")
+    Component(unit4facade, "Unit4 Facade", "Spring Bean", "A facade onto the unit4 system.")
+    Component(security, "Security Component", "Spring Bean", "Provides functionality related to singing in, changing passwords, etc.")
+    Component(intrvreq, "Interview Request Component", "Spring Bean", "Provides functionality related to managing interview request, technical advisors selection, etc.")    
+
+    Rel(intrvc, intrv, "Uses")
+    Rel(lineobc, lineob, "Uses")
+    Rel(jobpc, jobp, "Uses")
+    Rel(techac, techa, "Uses")
+    Rel(recrc, recr, "Uses")
+    Rel(intrv, intrvreq, "Uses")
+    Rel(techa, unit4facade, "Uses")
+    Rel(recr, unit4facade, "Uses")
+    Rel(sign, security, "Uses")
+    
+    Rel(intrv, db, "Read & write to", "JDBC")
+    Rel(lineob, db, "Read & write to", "JDBC")
+    Rel(jobp, db, "Read & write to", "JDBC")
+    Rel(techa, db, "Read & write to", "JDBC")
+    Rel(recr, db, "Read & write to", "JDBC")
+    Rel(security, db, "Read & write to", "JDBC")
+
+    Rel(unit4facade, unit4, "Uses", "JSON/HTTPS")
+}
+
+Rel(spa, sign, "Uses", "JSON/HTTPS")
+Rel(spa, intrvc, "Uses", "JSON/HTTPS")
+Rel(spa, lineobc, "Uses", "JSON/HTTPS")
+Rel(spa, jobpc, "Uses", "JSON/HTTPS")
+Rel(spa, techac, "Uses", "JSON/HTTPS")
+Rel(spa, recrc, "Uses", "JSON/HTTPS")
+
+Rel(ma, sign, "Uses", "JSON/HTTPS")
+Rel(ma, intrvc, "Uses", "JSON/HTTPS")
+Rel(ma, lineobc, "Uses", "JSON/HTTPS")
+Rel(ma, jobpc, "Uses", "JSON/HTTPS")
+Rel(ma, techac, "Uses", "JSON/HTTPS")
+Rel(ma, recrc, "Uses", "JSON/HTTPS")
+@enduml

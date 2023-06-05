@@ -1,0 +1,20 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(rec, "Recruiter", "Levio employee.")
+Person(tad, "Technical advisor", "Levio employee.")
+System(ibs, "Recruitment System", "Allows recruiter to create and follow-up on interview requests.")
+System_Ext(es, "E-mail system", "The internal e-mail system.")
+System_Ext(mbs, "Unit4 System", "Stores all of the information about technical advisors, etc.")
+System_Ext(prkb, "Kibana/Prometheus", "Import and visualize metrics data")
+
+Rel(rec, ibs, "Uses")
+Rel(tad, ibs, "Uses")
+Rel(es, tad, "Sends e-mails to")
+Rel(es, rec, "Sends e-mails to")
+Rel(ibs, es, "Sends e-mails", "SMTP")
+Rel(prkb, ibs, "Periodically scrape/pulls metrics data", "HTTPS")
+Rel(ibs, mbs, "Uses", "HTTPS")
+@enduml

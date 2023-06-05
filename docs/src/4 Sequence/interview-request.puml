@@ -1,0 +1,38 @@
+@startuml
+actor       Recruiter
+actor       TechnicalAdvisor
+entity      RecruitingSystem
+
+Recruiter  -> RecruitingSystem: Create new interview
+group Technical advisor selection
+    RecruitingSystem -> RecruitingSystem: Look for available technical advisors
+    alt no technical advisor available
+        RecruitingSystem -> RecruitingSystem: Close the interview
+        RecruitingSystem -> Recruiter: No technical advisors are available
+    else at least one technical advisor available
+        RecruitingSystem  -> Recruiter: Interview created
+        RecruitingSystem -> TechnicalAdvisor: Send interview request to technical advisors
+        alt only one technical advisor accepted
+            TechnicalAdvisor -> RecruitingSystem: Accept interview request
+            RecruitingSystem -> TechnicalAdvisor: Notify technical advisor that interview is assigned to him
+            RecruitingSystem -> Recruiter: Notify that a technical advisor has accepted
+        else multilpe technical advisors accepted
+            loop for each technical advisor who accepted the interview request
+                alt first to accept
+                    TechnicalAdvisor -> RecruitingSystem: Accept interview request
+                    RecruitingSystem -> TechnicalAdvisor: Notify technical advisor that interview is assigned to him
+                else already assigned
+                    TechnicalAdvisor -> RecruitingSystem: Accept interview request
+                    RecruitingSystem -> TechnicalAdvisor: Notify technical advisor that interview is already assigned to someone else
+                end
+            end
+            RecruitingSystem -> Recruiter: Notify that multiple technical advisors are available
+        else no one accepted
+            RecruitingSystem -> RecruitingSystem: wait for some time
+            ref over RecruitingSystem
+                Technical advisor selection
+            end ref
+        end
+    end
+end
+@enduml

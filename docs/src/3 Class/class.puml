@@ -1,0 +1,87 @@
+@startuml
+class LineOfBusiness {
+  String name
+  JobPosition[] jobPositions
+}
+
+class JobPosition {
+  String name
+  LineOfBusiness lineOfBusiness
+  JobPosition parent
+}
+
+class TechnicalAdvisor {
+  String name
+  String email
+  Skill[] skills
+  Boolean active
+}
+
+class Recruiter {
+  String name
+  String email
+  Boolean active
+}
+
+enum LevelOfExpertise {
+    JUNIOR
+    INTERMEDIATE
+    SENIOR
+    SENIOR_PLUS
+    EXPERT
+}
+
+class Skill {
+    JobPosition jobPosition
+    LevelOfExpertise levelOfExpertise
+}
+
+class Interview {
+    Recruiter recruiter
+    JobPosition jobPosition
+    InterviewRequest[] interviewRequests
+    LevelOfExpertise levelOfExpertise
+    String personToInterview
+    String description
+    Boolean urgent
+}
+
+class InterviewRequest {
+    Interview interview
+    TechnicalAdvisor technicalAdvisor
+    InterviewResponse[] interviewResponses
+    InterviewRequestStatus status
+    Date responseDate
+}
+
+class InterviewResponse {
+    InterviewRequest interviewRequest
+    InterviewRequestStatus status
+    String comment
+    Date date
+    Integer order
+}
+
+enum DeclinedBy {
+    RECRUITER
+    TECHNICAL_ADVISOR
+}
+
+enum InterviewRequestStatus {
+    PENDING
+    ACCEPTED
+    REJECTED
+    REJECTED_BY_RECRUITER
+    ASSIGNED
+}
+
+JobPosition - JobPosition : parent of >
+JobPosition - LineOfBusiness : part of >
+TechnicalAdvisor -- Skill : has >
+Skill -- JobPosition : has >
+Recruiter -- Interview : create >
+Interview -- JobPosition : for >
+Interview -- InterviewRequest : generate >
+InterviewRequest -- InterviewResponse : has >
+InterviewRequest -- TechnicalAdvisor : for >
+@enduml

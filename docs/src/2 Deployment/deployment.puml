@@ -1,0 +1,47 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Deployment.puml
+
+LAYOUT_WITH_LEGEND()
+
+Deployment_Node(plc, "Levio", "Levio data center"){
+    Deployment_Node(dn, "recruiting-sys-web", "Centos 7"){
+        Deployment_Node(apache, "Apache Tomcat", "Apache Tomcat 10.x"){
+            Container(api, "API Application", "Java and Spring Boot", "Provides recruiting system functionality via a JSON/HTTPS API.")
+        }
+        Deployment_Node(nginx, "Nginx", "Nginx 1.24"){
+            Container(nginxc, "Reverse proxy", "Nginx", "Delivers the static content and the recruiting single page application.")
+        }
+    }
+    Deployment_Node(recruitingsysdb01, "recruiting-sys-db01", "Centos 7"){
+        Deployment_Node(oracle, "PostgreSQL - Primary", "PostgreSQL 15"){
+            ContainerDb(db, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+        }
+    }
+    Deployment_Node(recruitingsysdb02, "recruiting-sys-db02", "Centos 7"){
+        Deployment_Node(oracle2, "PostgreSQL - Secondary", "PostgreSQL 15"){
+            ContainerDb(db2, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+        }
+    }
+}
+
+Deployment_Node(mob, "Customer's mobile device", "Apple iOS or Android"){
+    Container(mobile, "Mobile App", "Xamarin", "Provides a limited subset ot recruiting system functionality to recruiter/technical advisor via their mobile device.")
+}
+
+Deployment_Node(comp, "Customer's computer", "Mircosoft Windows or Apple macOS"){
+    Deployment_Node(browser, "Web Browser", "Google Chrome, Mozilla Firefox"){
+        Container(spa, "Single Page Application", "Typescript and Angular", "Provides all the recruiting system functionality to recruiter/technical advisor via their web browser.")
+    }
+}
+
+Rel(mobile, nginxc, "Makes API calls to", "json/HTTPS")
+Rel(spa, nginxc, "Makes API calls to", "json/HTTPS")
+
+Rel(nginxc, api, "Redirect API calls to", "json/HTTP")
+
+Rel(nginxc, spa, "Delivers to the customer's web browser")
+Rel(api, db, "Reads from and writes to", "JDBC")
+Rel(api, db2, "Reads from and writes to", "JDBC")
+Rel(db, db2, "Replicates data to")
+
+@enduml
