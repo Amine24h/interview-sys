@@ -2,4 +2,16 @@ spring:
   datasource:
     password: password
     url: jdbc:postgresql://localhost:5432/interviewdb
-    username: postgres
+    username: postgres    username: postgres
+  flyway:
+    schemas: public
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+logging:
+  level:
+    net:
+      ttddyy:
+        dsproxy:
+          listener: debug
