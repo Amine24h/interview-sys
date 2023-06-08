@@ -1,6 +1,6 @@
 package ca.levio.recruitment.domain;
 
-enum LevelOfExpertise {
+public enum LevelOfExpertise {
     JUNIOR,
     INTERMEDIATE,
     SENIOR,

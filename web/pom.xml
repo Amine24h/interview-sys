@@ -14,13 +14,19 @@
   <name>interview-system-web</name>
 
   <dependencies>
-   <dependency>
+    <dependency>
+      <groupId>ca.levio.recruitment</groupId>
+      <artifactId>interview-system-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
       <groupId>ca.levio.recruitment</groupId>
       <artifactId>interview-system-application</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
