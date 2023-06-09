@@ -1,5 +1,7 @@
 # Interview system: Managing interviews requested by recruiters
 
+![Build](https://github.com/Amine24h/interview-sys/actions/workflows/workflows.yml/badge.svg)
+
 ## Docs
 The project documentation was created using the [c4builder](https://adrianvlupu.github.io/C4-Builder) tool (PlantUml, C4Model...).
 
