@@ -1,4 +1,4 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.technicaladvisor;
 
 public enum LevelOfExpertise {
     JUNIOR,

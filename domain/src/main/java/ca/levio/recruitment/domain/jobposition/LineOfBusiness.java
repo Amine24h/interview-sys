@@ -1,4 +1,4 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.jobposition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +19,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "skills" })
+@EqualsAndHashCode(exclude = { "jobPositions" })
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class TechnicalAdvisor {
-
+public class LineOfBusiness {
+    
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "technical_advisor_gen")
-    @SequenceGenerator(name = "technical_advisor_gen", sequenceName = "technical_advisor_seq", schema = "public", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "line_of_business_gen")
+    @SequenceGenerator(name = "line_of_business_gen", sequenceName = "line_of_business_seq", schema = "public", allocationSize = 1)
     private Long id;
     
     @Column(name = "name", nullable = false)
     String name;
 
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "active")
-    boolean active;
-    
-    @OneToMany(mappedBy = "technicalAdvisor", cascade = CascadeType.ALL)
-    List<Skill> skills = new ArrayList<>();
+    @OneToMany(mappedBy = "lineOfBusiness", cascade = CascadeType.ALL)
+    List<JobPosition> jobPositions = new ArrayList<>();
 }

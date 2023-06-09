@@ -1,4 +1,4 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.interview;
 
 public enum InterviewRequestStatus {
     PENDING,

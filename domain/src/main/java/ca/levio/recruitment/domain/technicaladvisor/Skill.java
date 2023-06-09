@@ -1,7 +1,6 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.technicaladvisor;
 
-import java.time.LocalDateTime;
-
+import ca.levio.recruitment.domain.jobposition.JobPosition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,37 +20,25 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "interview", "technicalAdvisor" })
+@EqualsAndHashCode(exclude = { "jobPosition" })
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class InterviewRequest {
-    
+public class Skill {
+
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "interview_request_gen")
-    @SequenceGenerator(name = "interview_request_gen", sequenceName = "interview_request_seq", schema = "public", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "skill_gen")
+    @SequenceGenerator(name = "skill_gen", sequenceName = "skill_seq", schema = "public", allocationSize = 1)
     private Long id;
-
-    @Column(name = "request_date")
-    LocalDateTime requestDate;
-
-    @Column(name = "response_date")
-    LocalDateTime responseDate;
-
-    @Column(name = "response_order")
-    Integer responseOrder;
-
-    @Column(name = "comment")
-    String comment;
-
-    @Column(name = "status")
+    
+    @Column(name = "level_of_expertise")
     @Enumerated(EnumType.STRING)
-    InterviewRequestStatus status;
-
+    LevelOfExpertise levelOfExpertise;
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_id")
-    Interview interview;
+    @JoinColumn(name = "job_position_id")
+    JobPosition jobPosition;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "technical_advisor_id")

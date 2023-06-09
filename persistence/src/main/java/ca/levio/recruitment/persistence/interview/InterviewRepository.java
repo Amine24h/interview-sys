@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import ca.levio.recruitment.domain.Interview;
-import ca.levio.recruitment.domain.JobPosition;
-import ca.levio.recruitment.domain.Recruiter;
+import ca.levio.recruitment.domain.interview.Interview;
+import ca.levio.recruitment.domain.jobposition.JobPosition;
+import ca.levio.recruitment.domain.recruiter.Recruiter;
 
 interface InterviewRepository extends JpaRepository<Interview, Long> {
 

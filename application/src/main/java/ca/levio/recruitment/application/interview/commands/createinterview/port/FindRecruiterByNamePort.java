@@ -2,7 +2,7 @@ package ca.levio.recruitment.application.interview.commands.createinterview.port
 
 import java.util.Optional;
 
-import ca.levio.recruitment.domain.Recruiter;
+import ca.levio.recruitment.domain.recruiter.Recruiter;
 
 public interface FindRecruiterByNamePort {
     

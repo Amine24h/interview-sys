@@ -5,9 +5,9 @@ import org.mapstruct.Mapping;
 
 import ca.levio.recruitment.application.interview.commands.createinterview.CreateInterviewCommand;
 import ca.levio.recruitment.application.interview.commands.createinterview.dto.CreatedInterviewDto;
-import ca.levio.recruitment.domain.Interview;
-import ca.levio.recruitment.domain.JobPosition;
-import ca.levio.recruitment.domain.Recruiter;
+import ca.levio.recruitment.domain.interview.Interview;
+import ca.levio.recruitment.domain.jobposition.JobPosition;
+import ca.levio.recruitment.domain.recruiter.Recruiter;
 
 @Mapper(componentModel = "spring")
 public interface CreateInterviewMapper {

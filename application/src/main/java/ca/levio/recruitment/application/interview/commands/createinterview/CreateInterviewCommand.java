@@ -2,7 +2,7 @@ package ca.levio.recruitment.application.interview.commands.createinterview;
 
 import ca.levio.recruitment.common.validation.DataValidator;
 import ca.levio.recruitment.common.validation.ValueOfEnum;
-import ca.levio.recruitment.domain.LevelOfExpertise;
+import ca.levio.recruitment.domain.technicaladvisor.LevelOfExpertise;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;

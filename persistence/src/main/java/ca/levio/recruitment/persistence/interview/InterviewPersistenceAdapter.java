@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 import ca.levio.recruitment.application.interview.commands.createinterview.port.CreateInterviewPort;
 import ca.levio.recruitment.application.interview.commands.createinterview.port.FindJobPositionByNamePort;
 import ca.levio.recruitment.application.interview.commands.createinterview.port.FindRecruiterByNamePort;
-import ca.levio.recruitment.domain.Interview;
-import ca.levio.recruitment.domain.JobPosition;
-import ca.levio.recruitment.domain.Recruiter;
+import ca.levio.recruitment.domain.interview.Interview;
+import ca.levio.recruitment.domain.jobposition.JobPosition;
+import ca.levio.recruitment.domain.recruiter.Recruiter;
 import lombok.RequiredArgsConstructor;
 
 @Component

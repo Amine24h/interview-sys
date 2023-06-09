@@ -1,8 +1,11 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.interview;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.levio.recruitment.domain.jobposition.JobPosition;
+import ca.levio.recruitment.domain.recruiter.Recruiter;
+import ca.levio.recruitment.domain.technicaladvisor.LevelOfExpertise;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package ca.levio.recruitment.domain;
+package ca.levio.recruitment.domain.jobposition;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
