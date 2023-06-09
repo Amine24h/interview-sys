@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.levio.recruitment.application.interview.commands.createinterview.CreateInterviewCommand;
 import ca.levio.recruitment.application.interview.commands.createinterview.CreateInterviewCommandUseCase;
+import ca.levio.recruitment.application.interview.commands.createinterview.dto.CreatedInterviewDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +17,7 @@ public class InterviewController {
     private final CreateInterviewCommandUseCase createInterviewCommandUseCase;
 
     @PostMapping("/interviews")
-    public void createInterview(@Valid @RequestBody CreateInterviewCommand command) {
-        createInterviewCommandUseCase.handle(command);
+    public CreatedInterviewDto createInterview(@Valid @RequestBody CreateInterviewCommand command) {
+        return createInterviewCommandUseCase.handle(command);
     }
 }

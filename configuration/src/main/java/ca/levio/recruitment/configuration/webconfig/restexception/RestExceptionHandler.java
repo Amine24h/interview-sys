@@ -19,6 +19,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import ca.levio.recruitment.domain.exceptions.ResourceNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -128,6 +129,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'",
                 ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
         apiError.setDebugMessage(ex.getMessage());
+
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(ResourceNotFoundException ex) {
+        log.error("ResourceNotFoundException {}", ex.toString());
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+        apiError.setMessage(ex.getMessage());
 
         return buildResponseEntity(apiError);
     }
