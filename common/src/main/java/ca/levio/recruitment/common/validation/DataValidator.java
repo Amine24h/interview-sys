@@ -1,4 +1,4 @@
-package ca.levio.recruitment.common;
+package ca.levio.recruitment.common.validation;
 
 import java.util.Set;
 
